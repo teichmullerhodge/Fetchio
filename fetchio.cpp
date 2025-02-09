@@ -1,7 +1,7 @@
-#include "utils.h"
 #include <iostream>
 #include <curl/curl.h>
 #include <optional>
+#include "helpers.h"
 
 size_t write_function(void *contents, size_t size, size_t nmemb, std::string *s){
     size_t newLength = size * nmemb;
