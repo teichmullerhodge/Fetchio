@@ -1,1 +1,1 @@
-g++ -O3 main.cpp -lcurl -pedantic -Wall -Wextra -o app.elf && valgrind ./app.elf --leak-check=full
+g++ -O3 main.cpp  -pthread -lcurl -pedantic -Wall -Wextra -o app.elf && time ./app.elf
