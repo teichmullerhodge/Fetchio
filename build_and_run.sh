@@ -1,1 +1,1 @@
-g++ -O3 main.cpp  -pthread -lcurl -pedantic -Wall -Wextra -o app.elf && time ./app.elf
+g++ -O3 -march=native -ffast-math -flto -pedantic -Wall -Wextra -o app.elf main.cpp -lcurl && time ./app.elf

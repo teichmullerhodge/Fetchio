@@ -12,8 +12,17 @@ int batch(){
 
    auto aoi = Aoi::start();
 
-   std::vector<aoiurl> urls{100, "https://jsonplaceholder.typicode.com/posts"};
-   std::vector<aoiheader> headers{100, {"Content-Type : application/json"}};
+   std::vector<aoiurl> urls;
+   urls.reserve(100);
+   std::vector<aoiheader> headers;
+   headers.reserve(100);
+   for (int i = 0; i < 100; ++i) {
+
+      urls.push_back("https://jsonplaceholder.typicode.com/posts");
+      headers.push_back({"Content-Type: application/json"});
+
+   }
+   
    auto promises = Aoi::get_as_batch(aoi, urls, headers, ASYNC);
    for(auto &p : promises){
 
@@ -31,9 +40,9 @@ int batch(){
 
 int main(int argc, char **argv){
 
-   auto response = Aoi::get(Aoi::start(), aoiurl{"https://jsonplaceholder.typicode.com/posts"}, DEFAULT_HEADERS, SYNC);
-   std::cout << response << "\n";
-   // batch();
+   // auto response = Aoi::get(Aoi::start(), aoiurl{"https://jsonplaceholder.typicode.com/posts"}, DEFAULT_HEADERS, SYNC);
+   // std::cout << response << "\n";
+   batch();
 
 }
 

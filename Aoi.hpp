@@ -47,7 +47,11 @@ class Aoi {
 
         static aoiengine start(){
             curl_global_init(CURL_GLOBAL_ALL);   
-            return curl_easy_init();
+            CURL* curl = curl_easy_init();
+            curl_easy_setopt(curl, CURLOPT_TCP_NODELAY, 1L);
+            curl_easy_setopt(curl, CURLOPT_FORBID_REUSE, 0L);
+            curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
+            return curl;
         }
         static void release(aoiengine engine){
             curl_easy_cleanup(engine);
@@ -159,7 +163,6 @@ class Aoi {
             for(size_t i = 0; i < urls.size(); ++i){
             
 
-                std::cout << urls[i] << "\n";
                 promises.emplace_back(std::async(std::launch::async, &Aoi::get, curl, urls[i], __HEADERS[i], isAsync));
 
 
